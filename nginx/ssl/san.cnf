@@ -1,0 +1,15 @@
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = example.dev
+DNS.2 = *.example.dev
+DNS.3 = example.xyz
+DNS.4 = *.example.xyz
+DNS.5 = hotdog.dev
+DNS.6 = *.hotdog.dev
+DNS.7 = hgaming.dev
+DNS.8 = *.hgaming.dev
+DNS.9 = charming.dev
+DNS.10 = *.charming.dev
+DNS.11 = juice.dev
+DNS.12 = *.juice.dev

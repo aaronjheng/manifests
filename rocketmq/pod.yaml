@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: rocketmq
+  name: rocketmq
+spec:
+  hostNetwork: true
+  containers:
+    - name: namesrv
+      image: docker.io/apache/rocketmq:5.3.1
+      args:
+        - ./mqnamesrv
+      env:
+        - name: HEAP_OPTS
+          value: "-Xms512M -Xmx512M -Xmn128M"
+      volumeMounts:
+        - mountPath: /home/rocketmq/logs
+          name: rocketmq-log-pvc
+    - name: broker
+      image: docker.io/apache/rocketmq:5.3.1
+      args:
+        - ./mqbroker
+        - -n
+        - 127.0.0.1:9876
+        - --enable-proxy
+      env:
+        - name: HEAP_OPTS
+          value: "-Xms512M -Xmx512M -Xmn128M"
+      volumeMounts:
+        - mountPath: /home/rocketmq/store
+          name: rocketmq-data-pvc
+        - mountPath: /home/rocketmq/logs
+          name: rocketmq-log-pvc
+        - mountPath: /tmp
+          name: rocketmq-temp
+    - name: dashboard
+      image: docker.io/apacherocketmq/rocketmq-dashboard:1.0.0
+      env:
+        - name: JAVA_OPTS
+          value: "-Xms512M -Xmx512M -Xmn128M -Drocketmq.namesrv.addr=127.0.0.1:9876 -Dserver.port=9877"
+      volumeMounts:
+        - mountPath: /tmp
+          name: rocketmq-temp
+  volumes:
+    - name: rocketmq-data-pvc
+      persistentVolumeClaim:
+        claimName: rocketmq-data
+    - name: rocketmq-log-pvc
+      persistentVolumeClaim:
+        claimName: rocketmq-log
+    - name: rocketmq-temp
+      emptyDir:
+        type: Directory

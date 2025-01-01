@@ -1,0 +1,26 @@
+object_storage:
+  bucket:
+    type: "FILESYSTEM"
+    config:
+      directory: "/data"
+
+scrape_configs:
+  - job_name: "activity"
+    scrape_interval: "10s"
+    static_configs:
+      - targets: ["192.168.122.104:6060"]
+    profiling_config:
+      pprof_config:
+        block:
+          enabled: true
+        goroutine:
+          enabled: true
+        mutex:
+          enabled: true
+        memory:
+          enabled: true
+        process_cpu:
+          enabled: true
+          delta: true
+        fgprof:
+          enabled: false

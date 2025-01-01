@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: prometheus
+  name: prometheus
+spec:
+  containers:
+    - name: prometheus
+      image: docker.io/prom/prometheus:v2.45.0
+      args:
+        - "--config.file=/etc/prometheus/prometheus.yml"
+        - "--storage.tsdb.path=/prometheus"
+        - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+        - "--web.console.templates=/usr/share/prometheus/consoles"
+        - "--web.enable-remote-write-receiver"
+      ports:
+        - containerPort: 9090
+          hostPort: 9090
+      volumeMounts:
+        - mountPath: /prometheus
+          name: prometheus-data-pvc
+        - mountPath: /etc/prometheus/prometheus.yml
+          name: prometheus-config
+  volumes:
+    - name: prometheus-data-pvc
+      persistentVolumeClaim:
+        claimName: prometheus-data
+    - hostPath:
+        path: ./prometheus.yaml
+        type: File
+      name: prometheus-config

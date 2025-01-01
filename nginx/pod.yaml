@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  containers:
+    - name: nginx
+      image: docker.io/library/nginx:1.26.2
+      args:
+        - nginx
+        - -g
+        - daemon off;
+      ports:
+        - containerPort: 443
+          hostPort: 443
+      volumeMounts:
+        - mountPath: /etc/nginx/conf.d
+          name: nginx-conf.d
+        - mountPath: /etc/nginx/ssl
+          name: nginx-ssl
+  volumes:
+    - hostPath:
+        path: /home/aaron/workspace/manifests/nginx/conf.d
+        type: File
+      name: nginx-conf.d
+    - hostPath:
+        path: /home/aaron/workspace/manifests/nginx/ssl
+        type: File
+      name: nginx-ssl

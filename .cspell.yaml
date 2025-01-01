@@ -1,0 +1,17 @@
+version: "0.2"
+ignorePaths: []
+dictionaryDefinitions: []
+dictionaries: []
+words: []
+ignoreWords:
+  - INITDB
+  - bitnami
+  - configdb
+  - envoyproxy
+  - googleapis
+  - jaegertracing
+  - redpanda
+  - redpandadata
+  - rocketmq
+  - xpack
+import: []

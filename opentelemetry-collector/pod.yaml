@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: opentelemetry-collector
+  name: opentelemetry-collector
+spec:
+  containers:
+    - name: opentelemetry-collector
+      image: docker.io/otel/opentelemetry-collector:0.71.0
+      args:
+        - "--config"
+        - "/etc/otel-collector-config.yaml"
+      ports:
+        - containerPort: 4317
+          hostPort: 4317
+        - containerPort: 4318
+          hostPort: 4318
+      volumeMounts:
+        - mountPath: /etc/otel-collector-config.yaml
+          name: opentelemetry-collector-config
+  volumes:
+    - hostPath:
+        path: ./opentelemetry-collector.yaml
+        type: File
+      name: opentelemetry-collector-config
