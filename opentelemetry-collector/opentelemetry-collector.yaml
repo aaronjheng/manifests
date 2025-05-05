@@ -11,10 +11,14 @@ processors:
 
 exporters:
   debug:
+    verbosity: detailed
 
 service:
   pipelines:
     traces:
-      receivers: ["otlp"]
-      processors: ["batch"]
-      exporters: ["debug"]
+      receivers:
+        - otlp
+      processors:
+        - batch
+      exporters:
+        - debug
