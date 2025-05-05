@@ -5,6 +5,7 @@ dictionaries: []
 words: []
 ignoreWords:
   - INITDB
+  - appendonly
   - bitnami
   - configdb
   - envoyproxy
