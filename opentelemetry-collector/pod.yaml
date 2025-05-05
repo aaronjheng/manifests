@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: opentelemetry-collector
-      image: docker.io/otel/opentelemetry-collector:0.71.0
+      image: docker.io/otel/opentelemetry-collector:0.123.0
       args:
         - "--config"
         - "/etc/otel-collector-config.yaml"
@@ -21,6 +21,6 @@ spec:
           name: opentelemetry-collector-config
   volumes:
     - hostPath:
-        path: ./opentelemetry-collector.yaml
+        path: /home/aaron/workspace/manifests/opentelemetry-collector/opentelemetry-collector.yaml
         type: File
       name: opentelemetry-collector-config

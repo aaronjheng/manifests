@@ -6,34 +6,15 @@ receivers:
       http:
         endpoint: 0.0.0.0:4318
 
-  prometheus:
-    config:
-      scrape_configs:
-        - job_name: "activity"
-          scrape_interval: 5s
-          static_configs:
-            - targets: ["192.168.105.185:6060"]
-
 processors:
   batch:
 
 exporters:
-  otlp:
-    endpoint: 192.168.105.185:14317
-    tls:
-      insecure: true
-
-  prometheusremotewrite:
-    endpoint: "http://192.168.105.185:9090/api/v1/write"
-    tls:
-      insecure: true
+  debug:
 
 service:
   pipelines:
     traces:
       receivers: ["otlp"]
       processors: ["batch"]
-      exporters: ["otlp"]
-    metrics:
-      receivers: ["prometheus"]
-      exporters: ["prometheusremotewrite"]
+      exporters: ["debug"]
