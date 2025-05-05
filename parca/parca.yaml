@@ -22,5 +22,3 @@ scrape_configs:
         process_cpu:
           enabled: true
           delta: true
-        fgprof:
-          enabled: false
