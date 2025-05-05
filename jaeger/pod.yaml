@@ -5,31 +5,9 @@ metadata:
     app: jaeger
   name: jaeger
 spec:
-  initContainers:
-    - image: docker.io/jaegertracing/all-in-one:1.58.0
-      command: ["/bin/sh"]
-      args:
-        - "-c"
-        - "mkdir -p /badger && touch /badger/.initialized && chown -R 10001:10001 /badger"
-      volumeMounts:
-        - mountPath: /badger
-          name: jaeger-badger-data-pvc
-      securityContext:
-        runAsUser: 0
   containers:
-    - image: docker.io/jaegertracing/all-in-one:1.58.0
+    - image: docker.io/jaegertracing/jaeger:2.5.0
       name: jaeger
-      env:
-        - name: SPAN_STORAGE_TYPE
-          value: badger
-        - name: BADGER_EPHEMERAL
-          value: "false"
-        - name: BADGER_DIRECTORY_VALUE
-          value: /badger/value
-        - name: BADGER_DIRECTORY_KEY
-          value: /badger/key
-        - name: COLLECTOR_OTLP_ENABLED
-          value: "true"
       ports:
         - containerPort: 4317
           hostPort: 24317
@@ -37,15 +15,3 @@ spec:
           hostPort: 24318
         - containerPort: 16686
           hostPort: 16686
-      volumeMounts:
-        - mountPath: /tmp
-          name: jaeger-temp
-        - mountPath: /badger
-          name: jaeger-badger-data-pvc
-  volumes:
-    - name: jaeger-badger-data-pvc
-      persistentVolumeClaim:
-        claimName: jaeger-badger-data
-    - name: jaeger-temp
-      emptyDir:
-        type: Directory
