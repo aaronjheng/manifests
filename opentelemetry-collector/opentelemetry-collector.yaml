@@ -12,6 +12,10 @@ processors:
 exporters:
   debug:
     verbosity: detailed
+  otlp/jaeger:
+    endpoint: host.containers.internal:24317
+    tls:
+      insecure: true
 
 service:
   pipelines:
@@ -22,3 +26,4 @@ service:
         - batch
       exporters:
         - debug
+        - otlp/jaeger
