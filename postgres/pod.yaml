@@ -9,6 +9,8 @@ spec:
     - name: postgres
       image: docker.io/library/postgres:17.4
       env:
+        - name: POSTGRES_USER
+          value: "postgres"
         - name: POSTGRES_PASSWORD
           value: "123456"
       ports:
