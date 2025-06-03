@@ -27,3 +27,10 @@ service:
       exporters:
         - debug
         - otlp/jaeger
+    metrics:
+      receivers:
+        - otlp
+      processors:
+        - batch
+      exporters:
+        - debug
