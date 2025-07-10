@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: opensearch
+  name: opensearch
+spec:
+  containers:
+    - image: docker.io/opensearchproject/opensearch:2.19.2
+      name: opensearch
+      env:
+        - name: cluster.name
+          value: opensearch
+        - name: discovery.type
+          value: single-node
+        - name: OPENSEARCH_JAVA_OPTS
+          value: -Xms512m -Xmx512m
+        - name: OPENSEARCH_INITIAL_ADMIN_PASSWORD
+          value: 123456@Opensearch
+      ports:
+        - containerPort: 9200
+          hostPort: 9200
+        - containerPort: 9600
+          hostPort: 9600
+      volumeMounts:
+        - mountPath: /usr/share/opensearch/data
+          name: opensearch-data-pvc
+        - mountPath: /usr/share/opensearch/logs
+          name: opensearch-log-pvc
+    - image: docker.io/opensearchproject/opensearch-dashboards:2.19.2
+      name: opensearch-dashboards
+      env:
+        - name: OPENSEARCH_HOSTS
+          value: https://127.0.0.1:9200
+      ports:
+        - containerPort: 5601
+          hostPort: 5601
+  volumes:
+    - name: opensearch-data-pvc
+      persistentVolumeClaim:
+        claimName: opensearch-data
+    - name: opensearch-log-pvc
+      persistentVolumeClaim:
+        claimName: opensearch-log
