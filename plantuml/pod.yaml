@@ -11,3 +11,10 @@ spec:
       ports:
         - containerPort: 8080
           hostPort: 8181
+      volumeMounts:
+        - mountPath: /tmp/jetty
+          name: plantuml-temp
+  volumes:
+    - name: plantuml-temp
+      emptyDir:
+        type: Directory
