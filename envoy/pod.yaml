@@ -6,7 +6,7 @@ metadata:
   name: envoy
 spec:
   containers:
-    - image: docker.io/envoyproxy/envoy:v1.22-latest
+    - image: docker.io/envoyproxy/envoy:v1.35.0
       name: envoy
       ports:
         - containerPort: 80
@@ -16,6 +16,6 @@ spec:
           name: envoy-config
   volumes:
     - hostPath:
-        path: /home/aaron/.config/envoy/
+        path: /home/aaron/workspace/manifests/envoy/
         type: File
       name: envoy-config
