@@ -6,7 +6,7 @@ metadata:
   name: elasticsearch
 spec:
   containers:
-    - image: docker.io/library/elasticsearch:8.18.0
+    - image: docker.io/library/elasticsearch:8.19.1
       name: elasticsearch
       env:
         - name: cluster.routing.allocation.disk.threshold_enabled
