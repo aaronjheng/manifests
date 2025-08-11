@@ -6,7 +6,7 @@ metadata:
   name: opensearch
 spec:
   containers:
-    - image: docker.io/opensearchproject/opensearch:doraemon
+    - image: docker.io/opensearchproject/opensearch:2.19.2
       name: opensearch
       env:
         - name: cluster.name

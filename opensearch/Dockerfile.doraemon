@@ -1,4 +1,0 @@
-FROM docker.io/opensearchproject/opensearch:2.19.2
-
-RUN /usr/share/opensearch/bin/opensearch-plugin install analysis-kuromoji \
-	&& /usr/share/opensearch/bin/opensearch-plugin install analysis-nori
