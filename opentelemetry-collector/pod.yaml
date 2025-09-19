@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: opentelemetry-collector
-      image: docker.io/otel/opentelemetry-collector:0.123.0
+      image: docker.io/otel/opentelemetry-collector:0.135.0
       args:
         - "--config"
         - "/etc/otel-collector-config.yaml"
