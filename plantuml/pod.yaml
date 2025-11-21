@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: plantuml
-      image: docker.io/plantuml/plantuml-server:v1.2025.4
+      image: docker.io/plantuml/plantuml-server:v1.2025.10
       ports:
         - containerPort: 8080
           hostPort: 8181

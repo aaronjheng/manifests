@@ -6,7 +6,7 @@ metadata:
   name: opensearch
 spec:
   containers:
-    - image: docker.io/opensearchproject/opensearch:2.19.2
+    - image: docker.io/opensearchproject/opensearch:2.5.0
       name: opensearch
       env:
         - name: cluster.name
@@ -27,7 +27,7 @@ spec:
           name: opensearch-data-pvc
         - mountPath: /usr/share/opensearch/logs
           name: opensearch-log-pvc
-    - image: docker.io/opensearchproject/opensearch-dashboards:2.19.2
+    - image: docker.io/opensearchproject/opensearch-dashboards:2.5.0
       name: opensearch-dashboards
       env:
         - name: OPENSEARCH_HOSTS
