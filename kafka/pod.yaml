@@ -55,6 +55,7 @@ spec:
       env:
         - name: KAFKA_BROKERS
           value: 127.0.0.1:9092
+
   volumes:
     - name: kafka-data-pvc
       persistentVolumeClaim:
