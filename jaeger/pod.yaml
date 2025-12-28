@@ -8,6 +8,7 @@ spec:
   containers:
     - image: docker.io/jaegertracing/jaeger:2.13.0
       name: jaeger
+      args: ["--config", "/etc/jaeger/jaeger.yaml"]
       ports:
         - containerPort: 4317
           hostPort: 24317
@@ -15,3 +16,16 @@ spec:
           hostPort: 24318
         - containerPort: 16686
           hostPort: 16686
+      volumeMounts:
+        - mountPath: /etc/jaeger/jaeger.yaml
+          name: jaeger-config
+        - mountPath: /tmp
+          name: jaeger-temp
+  volumes:
+    - hostPath:
+        path: /home/aaron/workspace/manifests/jaeger/jaeger.yaml
+        type: File
+      name: jaeger-config
+    - name: jaeger-temp
+      emptyDir:
+        type: Directory

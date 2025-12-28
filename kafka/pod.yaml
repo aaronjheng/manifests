@@ -30,13 +30,15 @@ spec:
         - name: KAFKA_PROCESS_ROLES
           value: broker,controller
         - name: KAFKA_ADVERTISED_LISTENERS
-          value: PLAINTEXT://192.168.64.6:9092
+          value: PLAINTEXT://192.168.64.3:9092
         - name: KAFKA_LISTENERS
           value: PLAINTEXT://:9092,CONTROLLER://:9093
         - name: KAFKA_LOG_DIR
           value: /var/lib/kafka/data
         - name: KAFKA_HEAP_OPTS
           value: -Xmx512M -Xms512M -Xmn128M
+        - name: KAFKA_AUTO_CREATE_TOPICS_ENABLE
+          value: "true"
       ports:
         - containerPort: 9092
           hostPort: 9092
@@ -48,7 +50,7 @@ spec:
         - mountPath: /mnt/shared/config
           name: kafka-shared-config-pvc
     - name: redpanda
-      image: docker.io/redpandadata/console:v3.2.1
+      image: docker.io/redpandadata/console:v3.3.2
       ports:
         - containerPort: 8080
           hostPort: 8090
