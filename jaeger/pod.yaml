@@ -10,10 +10,6 @@ spec:
       name: jaeger
       args: ["--config", "/etc/jaeger/jaeger.yaml"]
       ports:
-        - containerPort: 4317
-          hostPort: 24317
-        - containerPort: 4318
-          hostPort: 24318
         - containerPort: 16686
           hostPort: 16686
       volumeMounts:
