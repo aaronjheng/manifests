@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: opentelemetry-collector
-      image: docker.io/otel/opentelemetry-collector:0.140.0
+      image: docker.io/otel/opentelemetry-collector-contrib:0.142.0
       args:
         - "--config"
         - "/etc/otel-collector-config.yaml"
@@ -16,6 +16,9 @@ spec:
           hostPort: 4317
         - containerPort: 4318
           hostPort: 4318
+        - containerPort: 8125
+          hostPort: 8125
+          protocol: UDP
       volumeMounts:
         - mountPath: /etc/otel-collector-config.yaml
           name: opentelemetry-collector-config

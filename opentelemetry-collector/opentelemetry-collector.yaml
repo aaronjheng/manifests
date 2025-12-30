@@ -6,12 +6,36 @@ receivers:
       http:
         endpoint: 0.0.0.0:4318
 
+  statsd:
+    endpoint: "0.0.0.0:8125"
+    aggregation_interval: 1s
+    enable_metric_type: false
+    is_monotonic_counter: false
+    timer_histogram_mapping:
+      - statsd_type: "histogram"
+        observer_type: "histogram"
+        histogram:
+          max_size: 50
+          explicit_buckets:
+            - matcher_pattern: "foo.*"
+              buckets: [1, 10, 100]
+            - matcher_pattern: "bar.*"
+              buckets: [0.1, 0.5, 1]
+      - statsd_type: "distribution"
+        observer_type: "histogram"
+        histogram:
+          max_size: 50
+      - statsd_type: "timing"
+        observer_type: "summary"
+
 processors:
   batch:
 
 exporters:
   debug:
     verbosity: detailed
+  debug/statsd:
+    verbosity: normal
   otlp/jaeger:
     endpoint: jaeger:4317
     tls:
@@ -34,3 +58,10 @@ service:
         - batch
       exporters:
         - debug
+    metrics/statsd:
+      receivers:
+        - statsd
+      processors:
+        - batch
+      exporters:
+        - debug/statsd
