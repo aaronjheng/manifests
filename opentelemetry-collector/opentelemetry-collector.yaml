@@ -49,7 +49,7 @@ service:
       processors:
         - batch
       exporters:
-        - debug
+        # - debug
         - otlp/jaeger
     metrics:
       receivers:
