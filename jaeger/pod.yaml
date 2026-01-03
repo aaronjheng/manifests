@@ -6,7 +6,7 @@ metadata:
   name: jaeger
 spec:
   containers:
-    - image: docker.io/jaegertracing/jaeger:2.13.0
+    - image: docker.io/jaegertracing/jaeger:2.14.1
       name: jaeger
       args: ["--config", "/etc/jaeger/jaeger.yaml"]
       ports:
