@@ -6,7 +6,7 @@ metadata:
   name: envoy
 spec:
   containers:
-    - image: docker.io/envoyproxy/envoy:v1.36.4
+    - image: docker.io/envoyproxy/envoy:v1.37.0
       name: envoy
       ports:
         - containerPort: 80
