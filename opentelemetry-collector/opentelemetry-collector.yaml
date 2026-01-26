@@ -36,7 +36,7 @@ exporters:
     verbosity: detailed
   debug/statsd:
     verbosity: normal
-  otlp/jaeger:
+  otlp_grpc/jaeger:
     endpoint: jaeger:4317
     tls:
       insecure: true
@@ -50,7 +50,7 @@ service:
         - batch
       exporters:
         # - debug
-        - otlp/jaeger
+        - otlp_grpc/jaeger
     metrics:
       receivers:
         - otlp
