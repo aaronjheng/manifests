@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: pyroscope
+  name: pyroscope
+spec:
+  containers:
+    - name: pyroscope
+      image: docker.io/grafana/pyroscope:1.18.0
+      ports:
+        - containerPort: 4040
+          hostPort: 4040
+      volumeMounts:
+        - mountPath: /data
+          name: pyroscope-data-pvc
+        - mountPath: /data-compactor
+          name: pyroscope-data-compactor-pvc
+        - mountPath: /data-metastore
+          name: pyroscope-data-metastore-pvc
+  volumes:
+    - name: pyroscope-data-pvc
+      persistentVolumeClaim:
+        claimName: pyroscope-data
+    - name: pyroscope-data-compactor-pvc
+      persistentVolumeClaim:
+        claimName: pyroscope-data-compactor
+    - name: pyroscope-data-metastore-pvc
+      persistentVolumeClaim:
+        claimName: pyroscope-metastore-data
