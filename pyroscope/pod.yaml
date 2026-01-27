@@ -27,4 +27,4 @@ spec:
         claimName: pyroscope-data-compactor
     - name: pyroscope-data-metastore-pvc
       persistentVolumeClaim:
-        claimName: pyroscope-metastore-data
+        claimName: pyroscope-data-metastore
