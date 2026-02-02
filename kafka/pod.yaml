@@ -50,7 +50,7 @@ spec:
         - mountPath: /mnt/shared/config
           name: kafka-shared-config-pvc
     - name: redpanda
-      image: docker.io/redpandadata/console:v3.5.0
+      image: docker.io/redpandadata/console:v3.5.1
       ports:
         - containerPort: 8080
           hostPort: 8090
