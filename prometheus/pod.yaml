@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: prometheus
+  name: prometheus
+spec:
+  containers:
+    - name: prometheus
+      image: docker.io/prom/prometheus:v3.5.1
+      args:
+        - --config.file=/etc/prometheus/prometheus.yml
+        - --storage.tsdb.path=/prometheus
+        - --web.enable-otlp-receiver
+      ports:
+        - containerPort: 9090
+          hostPort: 9090
+      volumeMounts:
+        - mountPath: /etc/prometheus/prometheus.yml
+          name: prometheus-config-pvc
+        - mountPath: /prometheus
+          name: prometheus-data-pvc
+  volumes:
+    - name: prometheus-config-pvc
+      hostPath:
+        path: /home/aaron/workspace/manifests/prometheus/prometheus.yaml
+        type: File
+    - name: prometheus-data-pvc
+      persistentVolumeClaim:
+        claimName: prometheus-data
