@@ -6,7 +6,7 @@ metadata:
   name: etcd
 spec:
   containers:
-    - image: gcr.io/etcd-development/etcd:v3.6.8
+    - image: gcr.io/etcd-development/etcd:v3.6.11
       name: etcd
       args:
         - "etcd"
