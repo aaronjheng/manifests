@@ -12,6 +12,8 @@ spec:
         - redis-server
         - --appendonly
         - yes
+        - --requirepass
+        - 123456
       ports:
         - containerPort: 6379
           hostPort: 6379

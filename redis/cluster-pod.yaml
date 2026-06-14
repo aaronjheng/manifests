@@ -1,0 +1,142 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: redis-cluster
+  name: redis-cluster
+spec:
+  hostNetwork: true
+  containers:
+    - name: redis-0
+      image: docker.io/library/redis:7.4.2
+      args:
+        - redis-server
+        - --port
+        - "16379"
+        - --cluster-enabled
+        - "yes"
+        - --cluster-config-file
+        - /data/nodes.conf
+        - --cluster-node-timeout
+        - "5000"
+        - --appendonly
+        - "yes"
+      ports:
+        - containerPort: 16379
+      volumeMounts:
+        - mountPath: /data
+          name: redis-cluster-data-0
+    - name: redis-1
+      image: docker.io/library/redis:7.4.2
+      args:
+        - redis-server
+        - --port
+        - "16380"
+        - --cluster-enabled
+        - "yes"
+        - --cluster-config-file
+        - /data/nodes.conf
+        - --cluster-node-timeout
+        - "5000"
+        - --appendonly
+        - "yes"
+      ports:
+        - containerPort: 16380
+      volumeMounts:
+        - mountPath: /data
+          name: redis-cluster-data-1
+    - name: redis-2
+      image: docker.io/library/redis:7.4.2
+      args:
+        - redis-server
+        - --port
+        - "16381"
+        - --cluster-enabled
+        - "yes"
+        - --cluster-config-file
+        - /data/nodes.conf
+        - --cluster-node-timeout
+        - "5000"
+        - --appendonly
+        - "yes"
+      ports:
+        - containerPort: 16381
+      volumeMounts:
+        - mountPath: /data
+          name: redis-cluster-data-2
+    - name: redis-3
+      image: docker.io/library/redis:7.4.2
+      args:
+        - redis-server
+        - --port
+        - "16382"
+        - --cluster-enabled
+        - "yes"
+        - --cluster-config-file
+        - /data/nodes.conf
+        - --cluster-node-timeout
+        - "5000"
+        - --appendonly
+        - "yes"
+      ports:
+        - containerPort: 16382
+      volumeMounts:
+        - mountPath: /data
+          name: redis-cluster-data-3
+    - name: redis-4
+      image: docker.io/library/redis:7.4.2
+      args:
+        - redis-server
+        - --port
+        - "16383"
+        - --cluster-enabled
+        - "yes"
+        - --cluster-config-file
+        - /data/nodes.conf
+        - --cluster-node-timeout
+        - "5000"
+        - --appendonly
+        - "yes"
+      ports:
+        - containerPort: 16383
+      volumeMounts:
+        - mountPath: /data
+          name: redis-cluster-data-4
+    - name: redis-5
+      image: docker.io/library/redis:7.4.2
+      args:
+        - redis-server
+        - --port
+        - "16384"
+        - --cluster-enabled
+        - "yes"
+        - --cluster-config-file
+        - /data/nodes.conf
+        - --cluster-node-timeout
+        - "5000"
+        - --appendonly
+        - "yes"
+      ports:
+        - containerPort: 16384
+      volumeMounts:
+        - mountPath: /data
+          name: redis-cluster-data-5
+  volumes:
+    - name: redis-cluster-data-0
+      persistentVolumeClaim:
+        claimName: redis-cluster-data-0
+    - name: redis-cluster-data-1
+      persistentVolumeClaim:
+        claimName: redis-cluster-data-1
+    - name: redis-cluster-data-2
+      persistentVolumeClaim:
+        claimName: redis-cluster-data-2
+    - name: redis-cluster-data-3
+      persistentVolumeClaim:
+        claimName: redis-cluster-data-3
+    - name: redis-cluster-data-4
+      persistentVolumeClaim:
+        claimName: redis-cluster-data-4
+    - name: redis-cluster-data-5
+      persistentVolumeClaim:
+        claimName: redis-cluster-data-5
