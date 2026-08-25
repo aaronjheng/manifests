@@ -12,10 +12,14 @@ processors:
 exporters:
   debug:
     verbosity: detailed
+
   otlp_grpc/jaeger:
     endpoint: jaeger:4317
     tls:
       insecure: true
+
+  otlp_http/prometheus:
+    metrics_endpoint: http://prometheus:9090/api/v1/otlp/v1/metrics
 
 service:
   pipelines:
@@ -33,4 +37,5 @@ service:
       processors:
         - batch
       exporters:
-        - debug
+        # - debug
+        - otlp_http/prometheus
