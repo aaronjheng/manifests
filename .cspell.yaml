@@ -14,5 +14,6 @@ ignoreWords:
   - redpanda
   - redpandadata
   - rocketmq
+  - victoriametrics
   - xpack
 import: []

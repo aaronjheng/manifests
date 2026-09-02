@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: victoria-metrics
+  name: victoria-metrics
+spec:
+  containers:
+    - name: victoria-metrics
+      image: docker.io/victoriametrics/victoria-metrics:v1.151.0
+      args:
+        - -storageDataPath=/victoria-metrics-data
+      ports:
+        - containerPort: 8428
+          hostPort: 8428
+      volumeMounts:
+        - mountPath: /victoria-metrics-data
+          name: victoria-metrics-data-pvc
+  volumes:
+    - name: victoria-metrics-data-pvc
+      persistentVolumeClaim:
+        claimName: victoria-metrics-data

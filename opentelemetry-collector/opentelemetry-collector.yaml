@@ -21,6 +21,9 @@ exporters:
   otlp_http/prometheus:
     metrics_endpoint: http://prometheus:9090/api/v1/otlp/v1/metrics
 
+  otlp_http/victoria-metrics:
+    metrics_endpoint: http://victoria-metrics:8428/opentelemetry/v1/metrics
+
 service:
   pipelines:
     traces:
@@ -39,3 +42,4 @@ service:
       exporters:
         # - debug
         - otlp_http/prometheus
+        - otlp_http/victoria-metrics
