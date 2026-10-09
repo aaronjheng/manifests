@@ -65,7 +65,7 @@ spec:
         - mountPath: /data
           name: redis-cluster-data-2
     - name: redis-3
-      image: docker.io/library/redis:8.10.0
+      image: docker.io/library/redis:8.10.2
       args:
         - redis-server
         - --port
@@ -84,7 +84,7 @@ spec:
         - mountPath: /data
           name: redis-cluster-data-3
     - name: redis-4
-      image: docker.io/library/redis:8.10.0
+      image: docker.io/library/redis:8.10.2
       args:
         - redis-server
         - --port
@@ -103,7 +103,7 @@ spec:
         - mountPath: /data
           name: redis-cluster-data-4
     - name: redis-5
-      image: docker.io/library/redis:8.10.0
+      image: docker.io/library/redis:8.10.2
       args:
         - redis-server
         - --port
